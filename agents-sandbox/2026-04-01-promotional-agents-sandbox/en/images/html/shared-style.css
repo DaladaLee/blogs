@@ -1,0 +1,54 @@
+/*
+ * Article-level shared style template.
+ *
+ * When generating images for an article, copy this file to the article's
+ * images/ directory as "shared-style.css" and adjust values as needed.
+ * Every HTML card in the same article should reference this file via:
+ *
+ *   <link rel="stylesheet" href="shared-style.css">
+ *
+ * Variables defined here control base typography and spacing.
+ * Colors / theme are NOT included — each HTML card defines its own palette
+ * based on content semantics.
+ *
+ * To override a variable in a single HTML file, redefine it inside that
+ * file's own <style> block:
+ *
+ *   :root { --ave-title-size: 36px; }
+ */
+
+:root {
+  /* ── Font families ── */
+  --ave-font-family: 'Yuppy SC', -apple-system, BlinkMacSystemFont, sans-serif;
+  --ave-font-family-mono: 'SF Mono', Menlo, 'Courier New', monospace;
+
+  /* ── Text colors (semantic, not theme) ── */
+  --ave-text-primary: #1a1a1a;
+  --ave-text-secondary: #333;
+  --ave-text-muted: #666;
+
+  /* ── Font sizes ── */
+  --ave-title-size: 30px;
+  --ave-subtitle-size: 22px;
+  --ave-body-size: 22px;
+  --ave-small-size: 19px;
+  --ave-code-size: 15px;
+
+  /* ── Spacing ── */
+  --ave-body-padding: 44px 32px;
+  --ave-card-radius: 16px;
+
+  /* ── Common card background (light neutral) ── */
+  --ave-card-bg: rgba(245, 243, 240, 0.75);
+  --ave-card-bg-light: rgba(245, 243, 240, 0.75);
+}
+
+/* ── Base reset ── */
+body {
+  background: transparent;
+  font-family: var(--ave-font-family);
+  margin: 0;
+  padding: var(--ave-body-padding);
+  display: flex;
+  justify-content: center;
+}

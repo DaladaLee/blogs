@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="shared-style.css">
+<style>
+  /* Layout */
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    max-width: 900px;
+    width: 100%;
+  }
+  .card {
+    border-radius: var(--ave-card-radius);
+    padding: 28px;
+  }
+  /* Per-card colors — each card has its own palette */
+  .card:nth-child(1) { background: rgba(235,250,240, 0.75); border: 2px solid rgba(52,168,83,0.25); }
+  .card:nth-child(2) { background: rgba(233,238,255, 0.75); border: 2px solid rgba(29,78,216,0.25); }
+  .card:nth-child(3) { background: rgba(243,237,255, 0.75); border: 2px solid rgba(139,92,246,0.25); }
+  .card:nth-child(4) { background: rgba(255,243,235, 0.75); border: 2px solid rgba(232,113,26,0.25); }
+  .card:nth-child(5) { background: rgba(232,250,255, 0.75); border: 2px solid rgba(6,182,212,0.25); }
+  .card:nth-child(6) { background: rgba(253,238,248, 0.75); border: 2px solid rgba(236,72,153,0.25); }
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 12px;
+  }
+  .icon {
+    flex-shrink: 0;
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+  }
+  .card h3 {
+    color: var(--ave-text-primary);
+    font-size: 34px;
+    font-weight: 400;
+    -webkit-text-stroke: 0.8px var(--ave-text-primary);
+    margin: 0;
+    line-height: 1.2;
+  }
+  .card p {
+    color: var(--ave-text-muted);
+    font-size: var(--ave-body-size);
+    font-weight: 400;
+    line-height: 1.6;
+    margin: 0;
+  }
+</style>
+</head>
+<body>
+<div class="grid">
+  <div class="card">
+    <div class="header">
+      <div class="icon" style="background:rgba(52,168,83,0.15);">🛡️</div>
+      <h3>Host Machine Safety</h3>
+    </div>
+    <p>No access to host filesystem or network. Mistakes only destroy the disposable sandbox — the host is completely unaffected.</p>
+  </div>
+  <div class="card">
+    <div class="header">
+      <div class="icon" style="background:rgba(29,78,216,0.15);">🔓</div>
+      <h3>Agent at Full Speed</h3>
+    </div>
+    <p>Install anything, run any command, delete any file. Zero approval dialogs — just deliver results.</p>
+  </div>
+  <div class="card">
+    <div class="header">
+      <div class="icon" style="background:rgba(139,92,246,0.15);">💳</div>
+      <h3>Reuse Existing Subscriptions</h3>
+    </div>
+    <p>Host auth and CLI subscriptions (Claude Max, Codex) carry directly into the sandbox at zero extra cost.</p>
+  </div>
+  <div class="card">
+    <div class="header">
+      <div class="icon" style="background:rgba(232,113,26,0.15);">⚡</div>
+      <h3>One Command to Start</h3>
+    </div>
+    <p>agbox agent claude or agbox agent codex — full permissions, ready to go.</p>
+  </div>
+  <div class="card">
+    <div class="header">
+      <div class="icon" style="background:rgba(6,182,212,0.15);">🔒</div>
+      <h3>Data Stays on Your Machine</h3>
+    </div>
+    <p>Code, credentials, all agent activity stays local.</p>
+  </div>
+  <div class="card">
+    <div class="header">
+      <div class="icon" style="background:rgba(236,72,153,0.15);">💻</div>
+      <h3>No Mac Mini Needed</h3>
+    </div>
+    <p>Your laptop with Docker is all you need.</p>
+  </div>
+</div>
+</body>
+</html>
