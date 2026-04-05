@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Code vs Agents Sandbox</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #1e1e2e;
+    margin: 0;
+    font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+    padding: 0;
+  }
+  .container {
+    display: flex;
+    flex-direction: row;
+    gap: 0;
+    width: 100%;
+  }
+  .terminal-wrapper {
+    width: 50%;
+  }
+  .terminal {
+    background: #1e1e2e;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .header-sandbox {
+    background: #2a3a2e;
+  }
+  .terminal-header {
+    background: #2d2d3f;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot-red { background: #ff5f57; }
+  .dot-yellow { background: #febc2e; }
+  .dot-green { background: #28c840; }
+  .terminal-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 8px;
+    flex: 1;
+    text-align: center;
+  }
+  .terminal-top .terminal-title {
+    color: #f38ba8;
+  }
+  .terminal-bottom .terminal-title {
+    color: #a6e3a1;
+  }
+  .terminal-body {
+    padding: 12px;
+    overflow-y: visible;
+    min-height: 824px;
+  }
+  .line {
+    font-size: 22px;
+    line-height: 1.75;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    opacity: 0;
+    transition: opacity 0.15s;
+  }
+  .line.visible { opacity: 1; }
+
+  /* Colors */
+  .c-green { color: #a6e3a1; }
+  .c-blue { color: #89b4fa; }
+  .c-purple { color: #cba6f7; }
+  .c-yellow { color: #f9e2af; }
+  .c-orange { color: #fab387; }
+  .c-red { color: #f38ba8; }
+  .c-gray { color: #6c7086; }
+  .c-dim { color: #585b70; }
+  .c-white { color: #cdd6f4; }
+  .c-cyan { color: #94e2d5; }
+  .c-bold { font-weight: bold; }
+
+  .cursor {
+    display: inline-block;
+    width: 8px;
+    height: 17px;
+    background: #cdd6f4;
+    animation: blink 1s step-end infinite;
+    vertical-align: text-bottom;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+
+
+  .divider { color: #45475a; }
+
+  .replay-btn {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: #89b4fa;
+    color: #1e1e2e;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: inherit;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 10;
+  }
+  .replay-btn:hover { background: #b4d0fb; }
+  .replay-btn.show { opacity: 1; }
+
+  .sandbox-highlight {
+    background: rgba(166, 227, 161, 0.06);
+    border-left: 2px solid rgba(166, 227, 161, 0.3);
+    padding: 2px 0 2px 8px;
+    margin: 2px 0;
+    border-radius: 0 4px 4px 0;
+  }
+
+</style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Left: Local -->
+  <div class="terminal-wrapper">
+    <div class="terminal terminal-top">
+      <div class="terminal-header">
+        <div class="dot dot-red"></div>
+        <div class="dot dot-yellow"></div>
+        <div class="dot dot-green"></div>
+        <div class="terminal-title">Local — No Isolation</div>
+      </div>
+      <div class="terminal-body" id="top-body"></div>
+    </div>
+  </div>
+
+  <!-- Right: Sandbox -->
+  <div class="terminal-wrapper">
+    <div class="terminal terminal-bottom">
+      <div class="terminal-header header-sandbox">
+        <div class="dot dot-red"></div>
+        <div class="dot dot-yellow"></div>
+        <div class="dot dot-green"></div>
+        <div class="terminal-title">Agents Sandbox — Fully Isolated</div>
+      </div>
+      <div class="terminal-body" id="bottom-body"></div>
+    </div>
+  </div>
+</div>
+
+<button class="replay-btn" id="replay" onclick="replay()" style="display:none"></button>
+
+<script>
+// ── Content ──
+// Logo must match real Claude Code exactly (3 lines, specific spacing)
+const LOGO_L1 = ' \u2590\u259B\u2588\u2588\u2588\u259C\u258C';   // ▐▛███▜▌
+const LOGO_L2 = '\u259D\u259C\u2588\u2588\u2588\u2588\u2588\u259B\u2598'; // ▝▜█████▛▘
+const LOGO_L3 = '  \u2598\u2598 \u259D\u259D';   // ▘▘ ▝▝
+
+const DIVIDER = '\u2500'.repeat(40);
+const SANDBOX_ID = 'd8bee0c2';
+const SESSION_ID = '7bea6105';
+
+const PROMPT = 'Briefly introduce this project.';
+const ANSWER = [
+  'Agents Sandbox provides the ideal runtime for AI agents — full unrestricted permissions inside the sandbox, complete host safety guaranteed. One command to start, auto-destroyed when done.',
+];
+
+// ── Timeline: sequential steps, each has top[] and bottom[] lines ──
+function buildTimeline() {
+  const S = [];
+
+  // 1. Type command
+  S.push({
+    top:    [{ text: '\u276F claude --dangerously-skip-permissions', cls: 'c-green c-bold', typing: true }],
+    bottom: [{ text: '\u276F agbox agent claude', cls: 'c-green c-bold', typing: true }],
+    delay: 700
+  });
+
+  // 2. Sandbox startup (bottom only)
+  S.push({
+    top: [],
+    bottom: [
+      { text: `Waiting for sandbox...`, cls: 'c-yellow', sandbox: true },
+      { text: `Sandbox ${SANDBOX_ID} ready.`, cls: 'c-green', sandbox: true },
+    ],
+    delay: 900
+  });
+
+  // 3. Claude Code banner (both, identical except path)
+  S.push({
+    top: [
+      { text: '', cls: '' },
+      { text: `${LOGO_L1}   Claude Code v2.1.89`, cls: 'c-orange c-bold' },
+      { text: `${LOGO_L2}  Opus 4.6 (1M context) \u00B7 Claude Max`, cls: 'c-orange' },
+      { text: `${LOGO_L3}    ~/code/agents-sandbox`, cls: 'c-dim' },
+      { text: '', cls: '' },
+    ],
+    bottom: [
+      { text: '', cls: '' },
+      { text: `${LOGO_L1}   Claude Code v2.1.89`, cls: 'c-orange c-bold' },
+      { text: `${LOGO_L2}  Opus 4.6 (1M context) \u00B7 Claude Max`, cls: 'c-orange' },
+      { text: `${LOGO_L3}    /workspace`, cls: 'c-dim' },
+      { text: '', cls: '' },
+    ],
+    delay: 600
+  });
+
+  // 4. User types prompt
+  S.push({
+    top:    [{ text: `\u276F ${PROMPT}`, cls: 'c-white c-bold', typing: true }],
+    bottom: [{ text: `\u276F ${PROMPT}`, cls: 'c-white c-bold', typing: true }],
+    delay: 500
+  });
+
+  // 5. Read file
+  S.push({
+    top:    [{ text: '', cls: '' }, { text: '  Read 1 file (ctrl+o to expand)', cls: 'c-dim' }, { text: '', cls: '' }],
+    bottom: [{ text: '', cls: '' }, { text: '  Read 1 file (ctrl+o to expand)', cls: 'c-dim' }, { text: '', cls: '' }],
+    delay: 500
+  });
+
+  // 6. Stream answer
+  for (let i = 0; i < ANSWER.length; i++) {
+    S.push({
+      top:    [{ text: (i === 0 ? '\u25CF ' : '  ') + ANSWER[i], cls: i === 0 ? 'c-cyan' : 'c-white' }],
+      bottom: [{ text: (i === 0 ? '\u25CF ' : '  ') + ANSWER[i], cls: i === 0 ? 'c-cyan' : 'c-white' }],
+      delay: 150
+    });
+  }
+
+  // 7. Divider
+  S.push({
+    top:    [{ text: '', cls: '' }, { text: DIVIDER, cls: 'divider' }],
+    bottom: [{ text: '', cls: '' }, { text: DIVIDER, cls: 'divider' }],
+    delay: 400
+  });
+
+  // 8. /exit
+  S.push({
+    top:    [{ text: '\u276F /exit', cls: 'c-white c-bold', typing: true }],
+    bottom: [{ text: '\u276F /exit', cls: 'c-white c-bold', typing: true }],
+    delay: 300
+  });
+
+  S.push({
+    top:    [{ text: DIVIDER, cls: 'divider' }],
+    bottom: [{ text: DIVIDER, cls: 'divider' }],
+    delay: 300
+  });
+
+  // 9. Resume session
+  S.push({
+    top: [
+      { text: '', cls: '' },
+      { text: 'Resume this session with:', cls: 'c-dim' },
+      { text: `claude --resume ${SESSION_ID}...`, cls: 'c-blue' },
+    ],
+    bottom: [
+      { text: '', cls: '' },
+      { text: 'Resume this session with:', cls: 'c-dim' },
+      { text: `claude --resume ${SESSION_ID}...`, cls: 'c-blue' },
+    ],
+    delay: 600
+  });
+
+  // 10. Sandbox cleanup (bottom only)
+  S.push({
+    top: [],
+    bottom: [
+      { text: `Cleaning up sandbox ${SANDBOX_ID}...`, cls: 'c-yellow', sandbox: true },
+      { text: `Sandbox ${SANDBOX_ID}... cleaned up.`, cls: 'c-green c-bold', sandbox: true },
+    ],
+    delay: 800
+  });
+
+  // 11. Back to shell
+  S.push({
+    top:    [{ text: '', cls: '' }, { text: '\u276F ', cls: 'c-green c-bold', cursor: true }],
+    bottom: [{ text: '', cls: '' }, { text: '\u276F ', cls: 'c-green c-bold', cursor: true }],
+    delay: 0
+  });
+
+  return S;
+}
+
+// ── Engine ──
+const topBody    = document.getElementById('top-body');
+const bottomBody = document.getElementById('bottom-body');
+const replayBtn  = document.getElementById('replay');
+let animAbort = null;
+
+function esc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function mkLine(def) {
+  const d = document.createElement('div');
+  d.className = 'line';
+  if (def.sandbox) {
+    d.innerHTML = `<div class="sandbox-highlight"><span class="${def.cls}">${esc(def.text)}</span></div>`;
+  } else {
+    d.innerHTML = `<span class="${def.cls}">${esc(def.text)}</span>`;
+  }
+  if (def.cursor) d.innerHTML += '<span class="cursor"></span>';
+  return d;
+}
+
+function wait(ms, sig) {
+  return new Promise((ok, no) => {
+    const t = setTimeout(ok, ms);
+    if (sig) sig.addEventListener('abort', () => { clearTimeout(t); no(new Error('x')); });
+  });
+}
+
+async function typeInto(el, text, cls, sig) {
+  const span = document.createElement('span');
+  span.className = cls;
+  el.innerHTML = '';
+  const m = text.match(/^(\u276F\s*)/);
+  if (m) { span.textContent = m[1]; text = text.slice(m[1].length); }
+  el.appendChild(span);
+  const cur = document.createElement('span');
+  cur.className = 'cursor';
+  el.appendChild(cur);
+  for (const c of text) {
+    if (sig && sig.aborted) return;
+    span.textContent += c;
+    await wait(28, sig);
+  }
+  el.removeChild(cur);
+}
+
+async function run() {
+  const ac = new AbortController();
+  animAbort = ac;
+  const sig = ac.signal;
+  replayBtn.classList.remove('show');
+  topBody.innerHTML = '';
+  bottomBody.innerHTML = '';
+
+  try {
+    for (const step of buildTimeline()) {
+      if (sig.aborted) return;
+      const promises = [];
+      for (const def of step.top) {
+        const el = mkLine(def); topBody.appendChild(el); el.classList.add('visible');
+        if (def.typing) promises.push(typeInto(el, def.text, def.cls, sig));
+      }
+      for (const def of step.bottom) {
+        const el = mkLine(def); bottomBody.appendChild(el); el.classList.add('visible');
+        if (def.typing) promises.push(typeInto(el, def.text, def.cls, sig));
+      }
+      await Promise.all(promises);
+      if (step.delay > 0) await wait(step.delay, sig);
+    }
+  } catch(e) { return; }
+
+  replayBtn.classList.add('show');
+  // signal recorder: animation done, 3 blinks = 3s
+  setTimeout(() => { document.body.setAttribute('data-done', '1'); }, 3000);
+}
+
+function replay() {
+  if (animAbort) animAbort.abort();
+  setTimeout(run, 100);
+}
+
+window.addEventListener('load', () => setTimeout(run, 500));
+</script>
+</body>
+</html>
