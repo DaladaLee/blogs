@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="shared-style.css">
+<style>
+  .host {
+    display: inline-block;
+    border-radius: var(--ave-card-radius);
+    background: rgba(233, 238, 255, 0.75);
+    border: 2px solid rgba(29, 78, 216, 0.3);
+    padding: 28px;
+  }
+  .host-label {
+    font-size: 30px;
+    font-weight: 600;
+    color: #2563eb;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .content {
+    display: flex;
+    gap: 12px;
+    align-items: stretch;
+  }
+  /* Left: host restrictions */
+  .host-items {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    justify-content: center;
+  }
+  .host-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 27px;
+    line-height: 1.4;
+    color: var(--ave-text-secondary);
+  }
+  .icon-badge {
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+  .blocked { background: rgba(220, 38, 38, 0.12); }
+  .inject  { background: rgba(139, 92, 246, 0.12); }
+  .allowed { background: rgba(52, 168, 83, 0.12); }
+  .clean   { background: rgba(232, 113, 26, 0.12); }
+  strong { font-weight: 600; color: var(--ave-text-primary); }
+  .host-subtitle {
+    font-size: 22px;
+    color: var(--ave-text-muted);
+    margin-bottom: 2px;
+    -webkit-text-stroke: 0.3px var(--ave-text-muted);
+  }
+
+  /* Isolation border */
+  .isolation-border {
+    flex: 0 0 auto;
+    border: 3px dashed rgba(220, 38, 38, 0.4);
+    border-radius: 14px;
+    padding: 4px;
+    position: relative;
+  }
+  .isolation-label {
+    position: absolute;
+    top: -13px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(233, 238, 255, 0.95);
+    padding: 2px 16px;
+    font-size: 24px;
+    color: #dc2626;
+    font-weight: 600;
+    border-radius: 8px;
+    white-space: nowrap;
+  }
+
+  /* Right: sandbox */
+  .sandbox {
+    border-radius: var(--ave-card-radius);
+    background: rgba(235, 250, 240, 0.75);
+    border: 2px solid rgba(52, 168, 83, 0.3);
+    padding: 24px;
+    height: 100%;
+    box-sizing: border-box;
+  }
+  .sandbox-label {
+    font-size: 30px;
+    font-weight: 600;
+    color: #16a34a;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .sandbox-items {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .sandbox-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 27px;
+    line-height: 1.4;
+    color: var(--ave-text-secondary);
+  }
+</style>
+</head>
+<body>
+<div class="host">
+  <div class="host-label">🖥️ 宿主机</div>
+  <div class="content">
+    <div class="host-items">
+      <div class="host-subtitle">沙箱被隔离的边界</div>
+      <div class="host-item">
+        <div class="icon-badge blocked">🚫</div>
+        <div><strong>网络封锁</strong><br>localhost 和局域网永久不可触达</div>
+      </div>
+      <div class="host-item">
+        <div class="icon-badge blocked">🚫</div>
+        <div><strong>文件系统不可见</strong><br>仅显式声明的挂载才被允许</div>
+      </div>
+      <div class="host-item">
+        <div class="icon-badge blocked">🚫</div>
+        <div><strong>其他项目不可见</strong><br>只能看到当前沙箱的内容</div>
+      </div>
+      <div class="host-item">
+        <div class="icon-badge inject">🔑</div>
+        <div><strong>凭据按需注入</strong><br>仅 builtin_tools 声明的工具</div>
+      </div>
+    </div>
+
+    <div class="isolation-border">
+      <div class="isolation-label">🔒 完全隔离</div>
+      <div class="sandbox">
+        <div class="sandbox-label">📦 沙箱</div>
+        <div class="sandbox-items">
+          <div class="sandbox-item">
+            <div class="icon-badge allowed">✅</div>
+            <div><strong>全部权限</strong><br>Agent 在沙箱内无需任何审批</div>
+          </div>
+          <div class="sandbox-item">
+            <div class="icon-badge allowed">✅</div>
+            <div><strong>互联网可用</strong><br>下载依赖、调 API、clone 仓库</div>
+          </div>
+          <div class="sandbox-item">
+            <div class="icon-badge allowed">✅</div>
+            <div><strong>独立 Docker 网络</strong><br>每个沙箱一个隔离网络</div>
+          </div>
+          <div class="sandbox-item">
+            <div class="icon-badge clean">🧹</div>
+            <div><strong>删除即清零</strong><br>容器、网络、文件系统全部移除</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

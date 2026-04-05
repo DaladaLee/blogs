@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="shared-style.css">
+<style>
+  .container {
+    max-width: 940px;
+    width: 100%;
+  }
+
+  /* Title in a card so it's visible on both light/dark */
+  .title-card {
+    text-align: center;
+    margin-bottom: 8px;
+  }
+  .title-card span {
+    display: inline-block;
+    font-size: 28px;
+    -webkit-text-stroke: 0.6px var(--ave-text-primary);
+    color: var(--ave-text-primary);
+    background: var(--ave-card-bg);
+    padding: 14px 36px;
+    border-radius: 14px;
+  }
+  .subtitle {
+    text-align: center;
+    font-size: var(--ave-subtitle-size);
+    color: var(--ave-text-secondary);
+    margin-bottom: 28px;
+    background: var(--ave-card-bg-light);
+    display: inline-block;
+    padding: 6px 20px;
+    border-radius: 10px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .subtitle-wrap { text-align: center; margin-bottom: 24px; }
+
+  /* Row structure */
+  .row {
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .row-inner {
+    display: inline-flex;
+    flex-direction: column;
+  }
+  .row-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .row-label {
+    font-size: var(--ave-body-size);
+    -webkit-text-stroke: 0.4px currentColor;
+    padding: 8px 20px;
+    border-radius: 10px;
+    white-space: nowrap;
+  }
+  /* Row theme colors */
+  .row.host .row-label {
+    background: rgba(254, 242, 242, 0.75);
+    color: #b91c1c;
+  }
+  .row.sandbox .row-label {
+    background: rgba(240, 253, 244, 0.75);
+    color: #047857;
+  }
+
+  /* Pipeline steps */
+  .pipeline {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+  }
+  .step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 6px 6px;
+    border-radius: 10px;
+    white-space: nowrap;
+    width: 110px;
+  }
+  .step .icon { font-size: 24px; }
+  .step .label { font-size: 20px; color: var(--ave-text-secondary); }
+  .row.host .step {
+    background: rgba(254, 242, 242, 0.75);
+    border: 1.5px solid rgba(239, 68, 68, 0.2);
+  }
+  .row.sandbox .step {
+    background: rgba(240, 253, 244, 0.75);
+    border: 1.5px solid rgba(16, 185, 129, 0.25);
+  }
+
+  /* Host: interrupts between steps */
+  .interrupt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 10px;
+    flex-shrink: 0;
+    min-width: 60px;
+  }
+  .interrupt .hand { font-size: 20px; }
+  .interrupt .txt {
+    font-size: var(--ave-body-size);
+    color: #dc2626;
+    -webkit-text-stroke: 0.3px #dc2626;
+  }
+
+  /* Sandbox: smooth arrows */
+  .smooth-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+    flex-shrink: 0;
+    min-width: 60px;
+  }
+  .smooth-arrow .line {
+    width: 16px;
+    height: 3px;
+    background: #10b981;
+    border-radius: 2px;
+  }
+  .smooth-arrow .check {
+    font-size: 16px;
+    margin: 0 1px;
+  }
+  .smooth-arrow .head {
+    width: 0; height: 0;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 7px solid #10b981;
+  }
+
+  /* Result below pipeline */
+  .result {
+    text-align: center;
+    margin-top: 12px;
+  }
+  .result span {
+    display: inline-block;
+    font-size: var(--ave-body-size);
+    padding: 10px 28px;
+    border-radius: 12px;
+    -webkit-text-stroke: 0.3px currentColor;
+  }
+  .row.host .result span {
+    background: rgba(239, 68, 68, 0.08);
+    color: #b91c1c;
+  }
+  .row.sandbox .result span {
+    background: rgba(16, 185, 129, 0.1);
+    color: #047857;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="title-card"><span>场景一：让 Agent 全速完成一个编码任务</span></div>
+  <div class="subtitle-wrap">
+    <div class="subtitle">Agent 需要改代码、装依赖、跑测试、反复迭代，每一步都要执行命令</div>
+  </div>
+
+  <!-- Host row -->
+  <div class="row host">
+   <div class="row-inner">
+    <div class="row-header">
+      <div class="row-label">❌ 宿主机</div>
+    </div>
+    <div class="pipeline">
+      <div class="step">
+        <div class="icon">✏️</div>
+        <div class="label">改代码</div>
+      </div>
+      <div class="interrupt">
+        <div class="hand">🖐️</div>
+        <div class="txt">审批</div>
+      </div>
+      <div class="step">
+        <div class="icon">📥</div>
+        <div class="label">装依赖</div>
+      </div>
+      <div class="interrupt">
+        <div class="hand">🖐️</div>
+        <div class="txt">审批</div>
+      </div>
+      <div class="step">
+        <div class="icon">🧪</div>
+        <div class="label">跑测试</div>
+      </div>
+      <div class="interrupt">
+        <div class="hand">🖐️</div>
+        <div class="txt">审批</div>
+      </div>
+      <div class="step">
+        <div class="icon">🔄</div>
+        <div class="label">迭代修复</div>
+      </div>
+    </div>
+    <div class="result"><span>🐌 大部分时间在等你点"允许"</span></div>
+   </div>
+  </div>
+
+  <!-- Sandbox row -->
+  <div class="row sandbox">
+   <div class="row-inner">
+    <div class="row-header">
+      <div class="row-label">✅ agents-sandbox</div>
+    </div>
+    <div class="pipeline">
+      <div class="step">
+        <div class="icon">✏️</div>
+        <div class="label">改代码</div>
+      </div>
+      <div class="smooth-arrow">
+        <div class="line"></div>
+        <div class="check">✅</div>
+        <div class="line"></div>
+        <div class="head"></div>
+      </div>
+      <div class="step">
+        <div class="icon">📥</div>
+        <div class="label">装依赖</div>
+      </div>
+      <div class="smooth-arrow">
+        <div class="line"></div>
+        <div class="check">✅</div>
+        <div class="line"></div>
+        <div class="head"></div>
+      </div>
+      <div class="step">
+        <div class="icon">🧪</div>
+        <div class="label">跑测试</div>
+      </div>
+      <div class="smooth-arrow">
+        <div class="line"></div>
+        <div class="check">✅</div>
+        <div class="line"></div>
+        <div class="head"></div>
+      </div>
+      <div class="step">
+        <div class="icon">🔄</div>
+        <div class="label">迭代修复</div>
+      </div>
+    </div>
+    <div class="result"><span>⚡ 一路跑完，零中断，零痕迹</span></div>
+   </div>
+  </div>
+</div>
+</body>
+</html>

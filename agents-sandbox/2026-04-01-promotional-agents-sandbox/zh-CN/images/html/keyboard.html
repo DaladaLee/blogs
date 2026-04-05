@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  body {
+    margin: 0;
+    padding: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+  }
+
+  .keyboard {
+    background: linear-gradient(145deg, #e8e4df, #d4d0cb);
+    border-radius: 24px;
+    padding: 28px 36px 32px;
+    box-shadow:
+      0 8px 24px rgba(0,0,0,0.18),
+      0 2px 6px rgba(0,0,0,0.10),
+      inset 0 1px 0 rgba(255,255,255,0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+  }
+
+  /* USB cable */
+  .cable {
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 44px;
+    background: #ccc;
+    border-radius: 4px 4px 0 0;
+  }
+  .cable::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -4px;
+    width: 16px;
+    height: 10px;
+    background: #bbb;
+    border-radius: 3px 3px 0 0;
+  }
+
+  /* Logo area */
+  .logo-area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 4px;
+  }
+  .logo-area svg {
+    width: 40px;
+    height: 40px;
+  }
+  .logo-text {
+    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: #0F766E;
+    letter-spacing: 0.5px;
+  }
+
+  /* Keys row */
+  .keys {
+    display: flex;
+    gap: 16px;
+  }
+
+  .key {
+    background: linear-gradient(180deg, #fff 0%, #f0eeeb 100%);
+    border: 1px solid #c8c4bf;
+    border-radius: 10px;
+    padding: 18px 36px;
+    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+    font-size: 26px;
+    font-weight: 600;
+    color: #1a1a1a;
+    text-align: center;
+    box-shadow:
+      0 4px 0 #b8b4af,
+      0 6px 8px rgba(0,0,0,0.10),
+      inset 0 1px 0 rgba(255,255,255,0.9);
+    min-width: 100px;
+    cursor: pointer;
+    line-height: 1.3;
+  }
+</style>
+</head>
+<body>
+<div class="keyboard">
+  <div class="cable"></div>
+  <div class="logo-area">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="40" height="40">
+      <defs>
+        <linearGradient id="g4" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#14B8A6"/>
+          <stop offset="100%" stop-color="#0F766E"/>
+        </linearGradient>
+        <linearGradient id="g4b" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#5EEAD4" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="#14B8A6" stop-opacity="0.1"/>
+        </linearGradient>
+      </defs>
+      <g transform="translate(256,256) scale(1.4) translate(-256,-246)">
+        <path d="M76,360 A180,30 0 0,1 436,360" fill="none" stroke="#5EEAD4" stroke-width="3" opacity="0.3"/>
+        <path d="M76,360 A180,30 0 0,0 436,360" fill="none" stroke="#5EEAD4" stroke-width="3"/>
+        <path d="M96,360 Q96,140 256,120 Q416,140 416,360" fill="url(#g4b)" stroke="#5EEAD4" stroke-width="3"/>
+        <path d="M140,360 Q140,190 256,160 Q372,190 372,360" fill="none" stroke="#5EEAD4" stroke-width="1" opacity="0.3"/>
+        <path d="M186,360 Q186,220 256,200 Q326,220 326,360" fill="none" stroke="#5EEAD4" stroke-width="1" opacity="0.3"/>
+        <path d="M96,300 Q256,250 416,300" fill="none" stroke="#5EEAD4" stroke-width="1" opacity="0.3"/>
+        <path d="M116,250 Q256,200 396,250" fill="none" stroke="#5EEAD4" stroke-width="1" opacity="0.3"/>
+        <rect x="216" y="166" width="81" height="68" rx="14" fill="url(#g4)"/>
+        <circle cx="240" cy="196" r="9" fill="#F0FDFA"/>
+        <circle cx="272" cy="196" r="9" fill="#F0FDFA"/>
+        <circle cx="240" cy="196" r="4" fill="#134E4A"/>
+        <circle cx="272" cy="196" r="4" fill="#134E4A"/>
+        <line x1="256" y1="166" x2="256" y2="146" stroke="#5EEAD4" stroke-width="4"/>
+        <circle cx="256" cy="141" r="8" fill="#5EEAD4"/>
+        <rect x="207" y="241" width="97" height="81" rx="11" fill="url(#g4)"/>
+        <rect x="175" y="247" width="27" height="54" rx="8" fill="#0F766E"/>
+        <rect x="310" y="247" width="27" height="54" rx="8" fill="#0F766E"/>
+        <rect x="224" y="326" width="24" height="50" rx="5" fill="#0F766E"/>
+        <rect x="264" y="326" width="24" height="50" rx="5" fill="#0F766E"/>
+      </g>
+    </svg>
+    <span class="logo-text">Agents Sandbox</span>
+  </div>
+  <div class="keys">
+    <div class="key">Yes<br>always</div>
+    <div class="key">Mic</div>
+  </div>
+</div>
+</body>
+</html>
