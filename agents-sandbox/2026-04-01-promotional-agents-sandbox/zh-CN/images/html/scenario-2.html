@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="shared-style.css">
+<style>
+  .container {
+    max-width: 860px;
+    width: 100%;
+  }
+
+  .title-card { text-align: center; margin-bottom: 8px; }
+  .title-card span {
+    display: inline-block; font-size: var(--ave-title-size); -webkit-text-stroke: 0.6px var(--ave-text-primary);
+    color: var(--ave-text-primary); background: var(--ave-card-bg);
+    padding: 14px 36px; border-radius: 14px;
+  }
+  .subtitle-wrap { text-align: center; margin-bottom: 24px; }
+  .subtitle {
+    display: inline-block; font-size: 23px; color: var(--ave-text-secondary);
+    background: var(--ave-card-bg-light); padding: 6px 20px; border-radius: 10px;
+  }
+
+  /* Three sandboxes */
+  .sandboxes {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    max-width: 780px;
+    margin: 0 auto;
+  }
+  .sandbox-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 14px 22px;
+    border-radius: var(--ave-card-radius);
+  }
+  /* Per-column colors */
+  .sandbox-col:nth-child(1) {
+    background: rgba(235,250,240, 0.75);
+    border: 2px solid rgba(52,168,83,0.3);
+  }
+  .sandbox-col:nth-child(3) {
+    background: rgba(235,245,255, 0.75);
+    border: 2px solid rgba(91,155,213,0.3);
+  }
+  .sandbox-col:nth-child(5) {
+    background: rgba(255,250,235, 0.75);
+    border: 2px solid rgba(244,180,0,0.3);
+  }
+
+  .sandbox-name {
+    font-size: 21px;
+    color: var(--ave-text-muted);
+    margin-bottom: 14px;
+    letter-spacing: 0.5px;
+  }
+  .sandbox-icon {
+    font-size: 50px;
+    margin-bottom: 12px;
+  }
+  .sandbox-agent {
+    font-size: 26px;
+    -webkit-text-stroke: 0.4px currentColor;
+    color: var(--ave-text-primary);
+    margin-bottom: 6px;
+    text-align: center;
+  }
+  .sandbox-task {
+    font-size: 23px;
+    color: #555;
+    text-align: center;
+    line-height: 1.4;
+  }
+  .sandbox-perm {
+    margin-top: 16px;
+    font-size: var(--ave-small-size);
+    color: #047857;
+    background: rgba(16, 185, 129, 0.08);
+    padding: 6px 16px;
+    border-radius: 8px;
+  }
+
+  /* Isolation wall */
+  .wall {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    flex-shrink: 0;
+    gap: 5px;
+  }
+  .wall-line {
+    width: 3px;
+    height: 20px;
+    background: #ddd;
+    border-radius: 2px;
+  }
+  .wall-icon { font-size: 24px; }
+
+  /* Bottom note */
+  .note { text-align: center; margin-top: 18px; }
+  .note span {
+    display: inline-block; font-size: 24px; color: var(--ave-text-secondary);
+    -webkit-text-stroke: 0.3px var(--ave-text-secondary); background: rgba(245, 243, 240, 0.75);
+    padding: 10px 28px; border-radius: 12px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="title-card"><span>场景二：并行跑多个 Agent 做不同任务</span></div>
+  <div class="subtitle-wrap">
+    <div class="subtitle">三个 agents-sandbox 同时启动，各自独立工作</div>
+  </div>
+
+  <div class="sandboxes">
+    <div class="sandbox-col">
+      <div class="sandbox-name">agents-sandbox 1</div>
+      <div class="sandbox-icon">🧩</div>
+      <div class="sandbox-agent">Codex</div>
+      <div class="sandbox-task">重构前端组件</div>
+      <div class="sandbox-perm">✅ 全部权限</div>
+    </div>
+
+    <div class="wall">
+      <div class="wall-line"></div>
+      <div class="wall-line"></div>
+      <div class="wall-icon">🔒</div>
+      <div class="wall-line"></div>
+      <div class="wall-line"></div>
+    </div>
+
+    <div class="sandbox-col">
+      <div class="sandbox-name">agents-sandbox 2</div>
+      <div class="sandbox-icon">🧪</div>
+      <div class="sandbox-agent">Claude Code</div>
+      <div class="sandbox-task">写 API 测试</div>
+      <div class="sandbox-perm">✅ 全部权限</div>
+    </div>
+
+    <div class="wall">
+      <div class="wall-line"></div>
+      <div class="wall-line"></div>
+      <div class="wall-icon">🔒</div>
+      <div class="wall-line"></div>
+      <div class="wall-line"></div>
+    </div>
+
+    <div class="sandbox-col">
+      <div class="sandbox-name">agents-sandbox 3</div>
+      <div class="sandbox-icon">📊</div>
+      <div class="sandbox-agent">数据分析脚本</div>
+      <div class="sandbox-task">处理不可信数据</div>
+      <div class="sandbox-perm">✅ 全部权限</div>
+    </div>
+  </div>
+
+  <div class="note"><span>完全隔离，互不影响，不会踩到对方的环境</span></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="shared-style.css">
+<style>
+  :root { --ave-body-padding: 40px; }
+
+  .table-wrap {
+    max-width: 1200px;
+    width: 100%;
+    border-radius: 18px;
+    overflow: hidden;
+    background: rgba(245, 243, 240, 0.75);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  th, td {
+    padding: 20px 22px;
+    text-align: left;
+    font-size: 24px;
+    line-height: 1.4;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  th {
+    font-size: 25px;
+    padding: 24px 22px;
+    white-space: nowrap;
+    -webkit-text-stroke: 0.5px currentColor;
+  }
+  th:first-child {
+    color: var(--ave-text-muted);
+    width: 180px;
+    -webkit-text-stroke: 0;
+  }
+  /* Highlight column */
+  th.highlight {
+    color: #fff;
+    background: #4a7cff;
+    border-radius: 0;
+    -webkit-text-stroke: 0.8px #fff;
+  }
+  td.highlight {
+    background: rgba(74, 124, 255, 0.06);
+    color: var(--ave-text-primary);
+    -webkit-text-stroke: 0.4px currentColor;
+  }
+  th.dim { color: var(--ave-text-muted); -webkit-text-stroke: 0; }
+  td.dim { color: var(--ave-text-muted); }
+  tr:last-child td { border-bottom: none; }
+  /* Good/bad markers */
+  .good { color: #16a34a; }
+  .bad { color: #dc2626; }
+  .neutral { color: #555; }
+  .sub { font-size: 19px; color: #888; display: block; margin-top: 2px; }
+</style>
+</head>
+<body>
+<div class="table-wrap">
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th class="dim">受限模式<span class="sub">Codex workspace-write<br>Claude Code default</span></th>
+      <th class="dim">全放开模式<span class="sub">Codex danger-full-access<br>Claude Code --dangerously-skip-permissions</span></th>
+      <th class="highlight">Agents Sandbox</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>git commit / push</td>
+      <td class="dim bad">阻止或需审批</td>
+      <td class="dim good">正常</td>
+      <td class="highlight good">正常</td>
+    </tr>
+    <tr>
+      <td>装依赖、跑测试</td>
+      <td class="dim bad">部分触发审批</td>
+      <td class="dim good">正常</td>
+      <td class="highlight good">正常</td>
+    </tr>
+    <tr>
+      <td>网络访问</td>
+      <td class="dim bad">全开或全关</td>
+      <td class="dim bad">全开（宿主暴露）</td>
+      <td class="highlight good">互联网可用，宿主封锁</td>
+    </tr>
+    <tr>
+      <td>审批弹窗</td>
+      <td class="dim bad">频繁</td>
+      <td class="dim good">无</td>
+      <td class="highlight good">无</td>
+    </tr>
+    <tr>
+      <td>宿主文件系统</td>
+      <td class="dim bad">全盘可读</td>
+      <td class="dim bad">全盘可读写</td>
+      <td class="highlight good">不可见 — 仅声明的挂载</td>
+    </tr>
+    <tr>
+      <td>其他项目</td>
+      <td class="dim bad">可读</td>
+      <td class="dim bad">可读写</td>
+      <td class="highlight good">不可见</td>
+    </tr>
+    <tr>
+      <td>凭据暴露</td>
+      <td class="dim bad">继承宿主环境</td>
+      <td class="dim bad">继承宿主环境</td>
+      <td class="highlight good">仅显式 builtin_tools</td>
+    </tr>
+    <tr>
+      <td>宿主安全</td>
+      <td class="dim neutral">部分</td>
+      <td class="dim bad">无</td>
+      <td class="highlight good">完全隔离</td>
+    </tr>
+    <tr>
+      <td>误操作爆炸半径</td>
+      <td class="dim neutral">写入受限，宿主可读</td>
+      <td class="dim bad">整台宿主机</td>
+      <td class="highlight good">仅一次性沙箱</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</body>
+</html>
