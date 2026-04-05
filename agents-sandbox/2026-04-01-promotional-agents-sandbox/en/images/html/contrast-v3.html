@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="shared-style.css">
+<style>
+  :root { --ave-body-padding: 34px 40px 36px; }
+
+  .container {
+    max-width: 900px;
+    width: 100%;
+    position: relative;
+  }
+
+  /* Top question */
+  .question {
+    text-align: center;
+    margin-bottom: 0;
+  }
+  .question-main {
+    display: inline-block;
+    font-size: var(--ave-title-size);
+    font-weight: 400;
+    -webkit-text-stroke: 0.6px var(--ave-text-primary);
+    color: var(--ave-text-primary);
+    background: var(--ave-card-bg);
+    padding: 10px 42px;
+    border-radius: var(--ave-card-radius);
+  }
+
+  /* Fork area: lines + labels overlaid */
+  .fork-area {
+    position: relative;
+    height: 95px;
+    margin-bottom: 0;
+  }
+  .fork-area .stem {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 3px;
+    height: 59px;
+    background: #888;
+    transform: translateX(-50%);
+  }
+  .fork-area .bar {
+    position: absolute;
+    top: 59px;
+    left: 12%;
+    right: 12%;
+    height: 3px;
+    background: #888;
+  }
+  .fork-area .drop-left,
+  .fork-area .drop-right {
+    position: absolute;
+    top: 59px;
+    width: 3px;
+    height: 29px;
+    background: #888;
+  }
+  .fork-area .drop-left { left: 12%; }
+  .fork-area .drop-right { right: 12%; }
+  .fork-area .drop-left::after,
+  .fork-area .drop-right::after {
+    content: '';
+    position: absolute;
+    bottom: -7px;
+    left: -5px;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 8px solid #888;
+  }
+  .fork-area .label-left,
+  .fork-area .label-right {
+    position: absolute;
+    top: 23px;
+    font-size: 21px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 6px;
+    background: var(--ave-card-bg);
+    white-space: nowrap;
+  }
+  .fork-area .label-left {
+    left: 12%;
+    transform: translateX(16px);
+    color: #b45309;
+  }
+  .fork-area .label-right {
+    right: 12%;
+    transform: translateX(-16px);
+    color: #9a3412;
+  }
+
+  /* Path cards */
+  .paths {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 8px;
+  }
+  .path {
+    border-radius: var(--ave-card-radius);
+    padding: 24px 28px;
+  }
+  .path.restrict {
+    background: rgba(255, 247, 237, 0.75);
+    border: 2px solid rgba(245, 158, 66, 0.35);
+  }
+  .path.full-open {
+    background: rgba(255, 247, 237, 0.75);
+    border: 2px solid rgba(234, 88, 12, 0.3);
+  }
+  .tool-item { margin-bottom: 14px; }
+  .tool-item:last-child { margin-bottom: 0; }
+  .tool-name {
+    font-size: 21px;
+    font-weight: 400;
+    -webkit-text-stroke: 0.6px var(--ave-text-primary);
+    color: var(--ave-text-primary);
+    margin-bottom: 4px;
+  }
+  .tool-detail code {
+    background: rgba(0,0,0,0.08);
+    padding: 3px 8px;
+    border-radius: 5px;
+    font-size: 17px;
+    font-family: var(--ave-font-family-mono);
+    color: var(--ave-text-secondary);
+  }
+  .consequence {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px dashed rgba(0,0,0,0.1);
+  }
+  .consequence .icon { font-size: 29px; flex-shrink: 0; }
+  .consequence .text { font-size: 21px; font-weight: 600; line-height: 1.4; }
+  .path.restrict .consequence .text { color: #92400e; }
+  .path.full-open .consequence .text { color: #9a3412; }
+
+  /* Bottom section */
+  .bottom-block {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+  .crosses-row {
+    display: flex;
+    width: 100%;
+    margin-bottom: 6px;
+  }
+  .cross-left-col {
+    flex: 1;
+    text-align: center;
+    font-size: 32px;
+    position: relative;
+  }
+  .cross-right-col {
+    flex: 1;
+    text-align: center;
+    font-size: 32px;
+    position: relative;
+  }
+  .verdict {
+    text-align: center;
+    margin-top: 8px;
+  }
+  .verdict-box {
+    display: inline-block;
+    background: rgba(254, 226, 226, 0.75);
+    border: 2px solid rgba(220, 38, 38, 0.35);
+    border-radius: var(--ave-card-radius);
+    padding: 16px 48px;
+  }
+  .verdict-box .main {
+    font-size: 32px;
+    font-weight: 400;
+    -webkit-text-stroke: 0.6px #991b1b;
+    color: #991b1b;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+  .verdict-box .sub {
+    font-size: 20px;
+    color: var(--ave-text-secondary);
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="question">
+    <div class="question-main">Claude Code / Codex: How Much Permission to Give the Agent?</div>
+  </div>
+
+  <div class="fork-area">
+    <div class="stem"></div>
+    <div class="bar"></div>
+    <div class="drop-left"></div>
+    <div class="drop-right"></div>
+    <div class="label-left">🔒 Lock Down</div>
+    <div class="label-right">⚠️ Open Everything</div>
+  </div>
+
+  <div class="paths">
+    <div class="path restrict">
+      <div class="tool-item">
+        <div class="tool-name">Codex</div>
+        <div class="tool-detail"><code>workspace-write</code></div>
+      </div>
+      <div class="tool-item">
+        <div class="tool-name">Claude Code</div>
+        <div class="tool-detail"><code>default</code></div>
+      </div>
+      <div class="consequence">
+        <div class="icon">🐌</div>
+        <div class="text">Every step needs "Allow"<br>Agent spends most of its time waiting</div>
+      </div>
+    </div>
+    <div class="path full-open">
+      <div class="tool-item">
+        <div class="tool-name">Codex</div>
+        <div class="tool-detail"><code>danger-full-access</code></div>
+      </div>
+      <div class="tool-item">
+        <div class="tool-name">Claude Code</div>
+        <div class="tool-detail"><code>--dangerously-skip-permissions</code></div>
+      </div>
+      <div class="consequence">
+        <div class="icon">💥</div>
+        <div class="text">Agent can delete files, run any command<br>One mistake wrecks the whole machine</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-block">
+    <div class="crosses-row">
+      <div class="cross-left-col">❌</div>
+      <div class="cross-right-col">❌</div>
+    </div>
+    <div class="verdict">
+      <div class="verdict-box">
+        <div class="main">Neither Path Works</div>
+        <div class="sub">Lock down = no efficiency. Open up = no safety.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

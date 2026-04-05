@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="shared-style.css">
+<style>
+  :root { --ave-body-padding: 40px; }
+
+  .table-wrap {
+    max-width: 1200px;
+    width: 100%;
+    border-radius: 18px;
+    overflow: hidden;
+    background: rgba(245, 243, 240, 0.75);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  th, td {
+    padding: 20px 22px;
+    text-align: left;
+    font-size: 24px;
+    line-height: 1.4;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  th {
+    font-size: 25px;
+    padding: 24px 22px;
+    white-space: nowrap;
+    -webkit-text-stroke: 0.5px currentColor;
+  }
+  th:first-child {
+    color: var(--ave-text-muted);
+    width: 180px;
+    -webkit-text-stroke: 0;
+  }
+  /* Highlight column */
+  th.highlight {
+    color: #fff;
+    background: #4a7cff;
+    border-radius: 0;
+    -webkit-text-stroke: 0.8px #fff;
+  }
+  td.highlight {
+    background: rgba(74, 124, 255, 0.06);
+    color: var(--ave-text-primary);
+    -webkit-text-stroke: 0.4px currentColor;
+  }
+  th.dim { color: var(--ave-text-muted); -webkit-text-stroke: 0; }
+  td.dim { color: var(--ave-text-muted); }
+  tr:last-child td { border-bottom: none; }
+  /* Good/bad markers */
+  .good { color: #16a34a; }
+  .bad { color: #dc2626; }
+  .neutral { color: #555; }
+  .sub { font-size: 19px; color: #888; display: block; margin-top: 2px; }
+</style>
+</head>
+<body>
+<div class="table-wrap">
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th class="dim">Restricted Mode<span class="sub">Codex workspace-write<br>Claude Code default</span></th>
+      <th class="dim">Full-Open Mode<span class="sub">Codex danger-full-access<br>Claude Code --dangerously-skip-permissions</span></th>
+      <th class="highlight">Agents Sandbox</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>git commit / push</td>
+      <td class="dim bad">Blocked or needs approval</td>
+      <td class="dim good">Works</td>
+      <td class="highlight good">Works</td>
+    </tr>
+    <tr>
+      <td>Install deps, run tests</td>
+      <td class="dim bad">Some trigger approval</td>
+      <td class="dim good">Works</td>
+      <td class="highlight good">Works</td>
+    </tr>
+    <tr>
+      <td>Network access</td>
+      <td class="dim bad">All-or-nothing</td>
+      <td class="dim bad">Full open (host exposed)</td>
+      <td class="highlight good">Internet available, host blocked</td>
+    </tr>
+    <tr>
+      <td>Approval dialogs</td>
+      <td class="dim bad">Frequent</td>
+      <td class="dim good">None</td>
+      <td class="highlight good">None</td>
+    </tr>
+    <tr>
+      <td>Host filesystem</td>
+      <td class="dim bad">Full read access</td>
+      <td class="dim bad">Full read-write access</td>
+      <td class="highlight good">Invisible — declared mounts only</td>
+    </tr>
+    <tr>
+      <td>Other projects</td>
+      <td class="dim bad">Readable</td>
+      <td class="dim bad">Read-write</td>
+      <td class="highlight good">Invisible</td>
+    </tr>
+    <tr>
+      <td>Credential exposure</td>
+      <td class="dim bad">Inherits host environment</td>
+      <td class="dim bad">Inherits host environment</td>
+      <td class="highlight good">Explicit builtin_tools only</td>
+    </tr>
+    <tr>
+      <td>Host safety</td>
+      <td class="dim neutral">Partial</td>
+      <td class="dim bad">None</td>
+      <td class="highlight good">Fully isolated</td>
+    </tr>
+    <tr>
+      <td>Blast radius on mistake</td>
+      <td class="dim neutral">Writes restricted, host readable</td>
+      <td class="dim bad">Entire host machine</td>
+      <td class="highlight good">Disposable sandbox only</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</body>
+</html>
