@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="/home/fanrui/code/docs_theme/visual-components/styles/ave-variables.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 32px;
+      background: transparent;
+      font-family: var(--ave-font-family, 'Yuppy SC', -apple-system, BlinkMacSystemFont, sans-serif);
+    }
+    .mermaid {
+      display: flex;
+      justify-content: center;
+    }
+    /* Match VitePress mermaid styles */
+    .mermaid foreignObject {
+      overflow: visible !important;
+    }
+    .mermaid foreignObject > div {
+      line-height: 1.5 !important;
+      white-space: normal !important;
+      overflow: visible !important;
+    }
+    .mermaid .node rect {
+      rx: 12px;
+      ry: 12px;
+    }
+  </style>
+  <script src="/home/fanrui/code/creator/generated/cache/mermaid.min.js"></script>
+</head>
+<body>
+  <div class="mermaid">
+flowchart TB
+    subgraph L_context["优秀员工指南（沉淀层）"]
+        direction TB
+        OBS["历史观察<br/>原始对话记录"] --> REF["反思提炼"]
+        REF --> AXI["全局规则"]
+        REF --> BP["领域规则"]
+        REF --> PR["项目规则"]
+        REF --> KB["知识库"]
+        REF --> SK["skill（流程）"]
+    end
+
+    subgraph L_auto["全流程自动化（执行层）"]
+        direction LR
+        ADE["自动设计<br/>（含业界调研）"] --> DEV["自动开发 + 测试"] --> DEL["交付"]
+    end
+
+    L_context -->|提供规则 + skill + 知识| L_auto
+    L_auto -. 产生对话反哺观察层 .-> OBS
+
+    classDef source fill:#f5f3f0,stroke:#999,color:#333
+    classDef refine fill:#fff7e0,stroke:#f4b400,color:#8a6300
+    classDef rule fill:#e9eeff,stroke:#1d4ed8,color:#1d4ed8
+    classDef knowledge fill:#e6f4ea,stroke:#34a853,color:#1e7e34
+    classDef skill fill:#eee8ff,stroke:#6b46c1,color:#5b3fb0
+    classDef exec fill:#eef4ff,stroke:#6366f1,color:#4338ca
+    classDef deliver fill:#d9f5e4,stroke:#34a853,color:#1e7e34
+
+    class OBS source
+    class REF refine
+    class AXI,BP,PR rule
+    class KB knowledge
+    class SK skill
+    class ADE,DEV exec
+    class DEL deliver
+  </div>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      fontFamily: 'sans-serif',
+      fontSize: 16,
+    });
+  </script>
+</body>
+</html>

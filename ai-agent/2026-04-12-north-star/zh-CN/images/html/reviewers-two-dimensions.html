@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="/Users/rui/code/github/docs_theme/visual-components/styles/ave-variables.css">
+  <style>
+.ave-grid[data-v-373fc4e6] {
+  display: grid;
+  gap: 20px;
+  max-width: 900px;
+  width: 100%;
+}
+
+
+.ave-card[data-v-b2058f9a] {
+  border-radius: var(--ave-card-radius);
+  padding: 28px;
+  background: var(--_card-bg, var(--ave-card-bg));
+  border: 2px solid var(--_card-border, transparent);
+}
+/* Dark mode: use derived tinted background instead of hardcoded light cardBg */
+.dark {
+  background: var(--_card-bg-dark, var(--ave-card-bg)) !important;
+}
+.header[data-v-b2058f9a] {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+.icon[data-v-b2058f9a] {
+  flex-shrink: 0;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  background: var(--_icon-bg);
+}
+.dark {
+  background: var(--_icon-bg-dark, var(--_icon-bg)) !important;
+}
+.ave-card h3[data-v-b2058f9a] {
+  color: var(--ave-text-primary);
+  font-size: var(--ave-title-size);
+  font-weight: 400;
+  -webkit-text-stroke: 0.8px var(--ave-text-primary);
+  margin: 0;
+  line-height: 1.2;
+}
+.ave-card p[data-v-b2058f9a] {
+  color: var(--ave-text-muted);
+  font-size: var(--ave-body-size);
+  font-weight: 400;
+  line-height: 1.6;
+  margin: 0;
+}
+</style>
+</head>
+<body><div class="ave-grid" style="grid-template-columns:repeat(2, 1fr);" data-v-373fc4e6><!--[--><div class="ave-card" style="--_card-bg:rgba(235,243,255,0.75);--_card-bg-dark:rgba(66, 133, 244, 0.15);--_card-border:rgba(66,133,244,0.3);--_icon-bg:rgba(66,133,244,0.15);--_icon-bg-dark:rgba(66, 133, 244, 0.25);" data-v-b2058f9a><div class="header" data-v-b2058f9a><div class="icon" data-v-b2058f9a>👥</div><h3 data-v-b2058f9a>维度一：同模型多视角</h3></div><p data-v-b2058f9a><!--[-->多个 sub-agent 并行 review：同模型，但不同视角 / 不同 prompt，覆盖单一视角的盲点。<!--]--></p></div><div class="ave-card" style="--_card-bg:rgba(245,237,255,0.75);--_card-bg-dark:rgba(155, 89, 182, 0.15);--_card-border:rgba(155,89,182,0.3);--_icon-bg:rgba(155,89,182,0.15);--_icon-bg-dark:rgba(155, 89, 182, 0.25);" data-v-b2058f9a><div class="header" data-v-b2058f9a><div class="icon" data-v-b2058f9a>🔀</div><h3 data-v-b2058f9a>维度二：跨模型跨厂商</h3></div><p data-v-b2058f9a><!--[-->至少一个不同模型 / 不同厂商 review：Claude 产物由 Codex review，反之亦然，破除系统性偏好与盲区。<!--]--></p></div><!--]--></div></body>
+</html>

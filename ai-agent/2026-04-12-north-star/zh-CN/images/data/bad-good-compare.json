@@ -1,0 +1,37 @@
+{
+  "component": "AveCompareTable",
+  "props": {
+    "columns": [
+      { "label": "阶段" },
+      { "label": "❌ 聊天机器人模式", "class": "dim" },
+      { "label": "✅ 员工模式", "class": "highlight" }
+    ],
+    "rows": [
+      [
+        { "text": "需求澄清" },
+        { "text": "零散挤牙膏，反复多轮来回", "class": "dim bad" },
+        { "text": "主动缩小范围，提具体选项让用户确认", "class": "highlight good" }
+      ],
+      [
+        { "text": "设计" },
+        { "text": "AI 出稿 → 用户挑错 → AI 改 → 再挑", "class": "dim bad" },
+        { "text": "AI 自己调研、产出设计三件套、循环到合格", "class": "highlight good" }
+      ],
+      [
+        { "text": "开发+测试" },
+        { "text": "写一段让用户 review，测试没过让用户报 bug", "class": "dim bad" },
+        { "text": "自写自跑单元/集成/端到端测试，全过才算完成", "class": "highlight good" }
+      ],
+      [
+        { "text": "交付前" },
+        { "text": "用户充当 QA，肉眼扫产物", "class": "dim bad" },
+        { "text": "AI 自己确认符合所有规则，交付即终态", "class": "highlight good" }
+      ],
+      [
+        { "text": "真正需要用户" },
+        { "text": "\"你看这个行不行\"、\"有没有问题\"", "class": "dim bad" },
+        { "text": "需求变化、偏好选择、能力边界之外的判断", "class": "highlight good" }
+      ]
+    ]
+  }
+}

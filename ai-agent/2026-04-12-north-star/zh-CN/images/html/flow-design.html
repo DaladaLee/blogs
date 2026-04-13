@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="/home/fanrui/code/docs_theme/visual-components/styles/ave-variables.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 32px;
+      background: transparent;
+      font-family: var(--ave-font-family, 'Yuppy SC', -apple-system, BlinkMacSystemFont, sans-serif);
+    }
+    .mermaid {
+      display: flex;
+      justify-content: center;
+    }
+    /* Match VitePress mermaid styles */
+    .mermaid foreignObject {
+      overflow: visible !important;
+    }
+    .mermaid foreignObject > div {
+      line-height: 1.5 !important;
+      white-space: normal !important;
+      overflow: visible !important;
+    }
+    .mermaid .node rect {
+      rx: 12px;
+      ry: 12px;
+    }
+  </style>
+  <script src="/home/fanrui/code/creator/generated/cache/mermaid.min.js"></script>
+</head>
+<body>
+  <div class="mermaid">
+flowchart LR
+    IN["用户目标"] --> IR["业界调研<br/>（先例 / 方案对比）"] --> D["设计三件套"] --> OUT["交给下一环"]
+
+    classDef input fill:#f5f3f0,stroke:#999,color:#333
+    classDef process fill:#eef4ff,stroke:#6366f1,color:#4338ca
+    classDef artifact fill:#fff7e0,stroke:#f4b400,color:#8a6300
+    classDef output fill:#d9f5e4,stroke:#34a853,color:#1e7e34
+
+    class IN input
+    class IR process
+    class D artifact
+    class OUT output
+  </div>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      fontFamily: 'sans-serif',
+      fontSize: 16,
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+{
+  "component": "AveGrid",
+  "props": { "cols": 2 },
+  "children": [
+    {
+      "component": "AveCard",
+      "props": {
+        "icon": "👥",
+        "bg": "rgba(66,133,244,0.15)",
+        "title": "维度一：同模型多视角",
+        "cardBg": "rgba(235,243,255,0.75)",
+        "cardBorder": "rgba(66,133,244,0.3)"
+      },
+      "slot": "多个 sub-agent 并行 review：同模型，但不同视角 / 不同 prompt，覆盖单一视角的盲点。"
+    },
+    {
+      "component": "AveCard",
+      "props": {
+        "icon": "🔀",
+        "bg": "rgba(155,89,182,0.15)",
+        "title": "维度二：跨模型跨厂商",
+        "cardBg": "rgba(245,237,255,0.75)",
+        "cardBorder": "rgba(155,89,182,0.3)"
+      },
+      "slot": "至少一个不同模型 / 不同厂商 review：Claude 产物由 Codex review，反之亦然，破除系统性偏好与盲区。"
+    }
+  ]
+}

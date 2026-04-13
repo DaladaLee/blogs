@@ -1,0 +1,18 @@
+{
+  "component": "AveFlowDiagram",
+  "props": {
+    "direction": "LR",
+    "nodes": [
+      { "id": "ORC",  "label": "编排者",      "color": "blue" },
+      { "id": "DO",   "label": "sub-agent 干活", "color": "accent" },
+      { "id": "RV",   "label": "多 reviewers", "color": "yellow" },
+      { "id": "NEXT", "label": "进入下一环",   "color": "safe" }
+    ],
+    "edges": [
+      { "from": "ORC",  "to": "DO" },
+      { "from": "DO",   "to": "RV" },
+      { "from": "RV",   "to": "DO",   "type": "back", "label": "不通过" },
+      { "from": "RV",   "to": "NEXT", "label": "全部通过" }
+    ]
+  }
+}

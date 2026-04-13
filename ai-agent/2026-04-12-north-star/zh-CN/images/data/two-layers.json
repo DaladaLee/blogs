@@ -1,0 +1,22 @@
+{
+  "component": "AveCompareTable",
+  "props": {
+    "columns": [
+      { "label": "层" },
+      { "label": "定义" },
+      { "label": "容忍度" }
+    ],
+    "rows": [
+      [
+        { "text": "🛡️ 硬前提：交付质量", "class": "highlight" },
+        { "text": "通过多轮循环 Review，所有交付结果符合所有规则", "class": "highlight" },
+        { "text": "零容忍", "class": "highlight bad" }
+      ],
+      [
+        { "text": "📉 软目标：降低介入频率", "class": "highlight" },
+        { "text": "质量达标前提下，同类任务的人工介入频率随时间下降", "class": "highlight" },
+        { "text": "趋势必须向下", "class": "highlight good" }
+      ]
+    ]
+  }
+}

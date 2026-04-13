@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="/Users/rui/code/github/docs_theme/visual-components/styles/ave-variables.css">
+  <style>
+.ave-simple-table-wrap[data-v-1fd17cf6] {
+  width: 100%;
+  border-radius: var(--ave-card-radius);
+  overflow: hidden;
+  border: 2px solid var(--ave-border-color, rgba(0, 0, 0, 0.06));
+  background: var(--ave-card-bg);
+}
+.ave-simple-table-scroll[data-v-1fd17cf6] {
+  overflow-x: auto;
+}
+table[data-v-1fd17cf6] {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 400px;
+}
+th[data-v-1fd17cf6], td[data-v-1fd17cf6] {
+  padding: 14px 18px;
+  text-align: left;
+  font-size: var(--ave-body-size);
+  line-height: 1.4;
+}
+
+/* -- Table header row -- */
+thead tr[data-v-1fd17cf6] {
+  background: var(--ave-accent-bg);
+}
+thead th[data-v-1fd17cf6] {
+  font-size: var(--ave-subtitle-size);
+  padding: 16px 18px;
+  font-weight: 600;
+  color: var(--ave-text-primary);
+  border-bottom: 2px solid var(--ave-border-color, rgba(0, 0, 0, 0.06));
+}
+
+/* -- Striped rows -- */
+tbody tr[data-v-1fd17cf6]:nth-child(odd) {
+  background: var(--ave-card-bg);
+}
+tbody tr[data-v-1fd17cf6]:nth-child(even) {
+  background: var(--ave-stripe-bg, rgba(0, 0, 0, 0.03));
+}
+.dark tbody tr[data-v-1fd17cf6]:nth-child(even) {
+  background: var(--ave-stripe-bg-dark, rgba(255, 255, 255, 0.04));
+}
+
+/* -- First column (row labels) -- */
+td[data-v-1fd17cf6]:first-child {
+  color: var(--ave-text-secondary);
+  font-weight: 500;
+}
+
+/* -- Semantic cell colors -- */
+.good[data-v-1fd17cf6] { color: var(--ave-color-good);
+}
+.bad[data-v-1fd17cf6] { color: var(--ave-color-bad);
+}
+.neutral[data-v-1fd17cf6] { color: var(--ave-text-secondary);
+}
+.sub[data-v-1fd17cf6] {
+  font-size: var(--ave-small-size);
+  color: var(--ave-text-muted);
+  display: block;
+  margin-top: 2px;
+}
+</style>
+</head>
+<body><div class="ave-simple-table-wrap" data-v-1fd17cf6><div class="ave-simple-table-scroll" data-v-1fd17cf6><table data-v-1fd17cf6><thead data-v-1fd17cf6><tr data-v-1fd17cf6><!--[--><th data-v-1fd17cf6>需求类型</th><th data-v-1fd17cf6>用户消息轮次上限</th><!--]--></tr></thead><tbody data-v-1fd17cf6><!--[--><tr data-v-1fd17cf6><!--[--><td class="" data-v-1fd17cf6>简单需求 <span class="sub" data-v-1fd17cf6>bug 修复、小功能、文档改动</span></td><td class="good" data-v-1fd17cf6>≤ 3 轮 <!----></td><!--]--></tr><tr data-v-1fd17cf6><!--[--><td class="" data-v-1fd17cf6>中等需求 <span class="sub" data-v-1fd17cf6>涉及设计决策、跨文件修改</span></td><td class="" data-v-1fd17cf6>≤ 10 轮 <!----></td><!--]--></tr><tr data-v-1fd17cf6><!--[--><td class="" data-v-1fd17cf6>复杂需求 <span class="sub" data-v-1fd17cf6>架构性变更、跨项目</span></td><td class="neutral" data-v-1fd17cf6>不设上限，但趋势应下降 <!----></td><!--]--></tr><!--]--></tbody></table></div></div></body>
+</html>
