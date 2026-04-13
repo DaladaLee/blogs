@@ -1,0 +1,17 @@
+{
+  "component": "AveFlowDiagram",
+  "props": {
+    "direction": "LR",
+    "nodes": [
+      { "id": "IN",  "label": "用户目标",   "color": "blue" },
+      { "id": "IR",  "label": "业界调研",   "color": "yellow" },
+      { "id": "D",   "label": "设计三件套", "color": "accent" },
+      { "id": "OUT", "label": "交给下一环", "color": "safe" }
+    ],
+    "edges": [
+      { "from": "IN",  "to": "IR" },
+      { "from": "IR",  "to": "D",   "label": "先例/方案对比" },
+      { "from": "D",   "to": "OUT" }
+    ]
+  }
+}

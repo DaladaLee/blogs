@@ -1,0 +1,41 @@
+{
+  "component": "AveVerticalList",
+  "children": [
+    {
+      "component": "AveListItem",
+      "props": {
+        "icon": "🎯",
+        "bg": "rgba(233,238,255,0.75)",
+        "title": "老板下达目标"
+      },
+      "slot": "只需说清楚想要什么，不需要管怎么做"
+    },
+    {
+      "component": "AveListItem",
+      "props": {
+        "icon": "🤖",
+        "bg": "rgba(235,250,240,0.75)",
+        "title": "员工独立交付结果"
+      },
+      "slot": "自主调研、设计、实现、测试，全链路闭环"
+    },
+    {
+      "component": "AveListItem",
+      "props": {
+        "icon": "📋",
+        "bg": "rgba(255,250,235,0.75)",
+        "title": "交付物符合所有规则"
+      },
+      "slot": "按优秀员工指南行事，不需要老板逐条核查"
+    },
+    {
+      "component": "AveListItem",
+      "props": {
+        "icon": "🔁",
+        "bg": "rgba(243,237,255,0.75)",
+        "title": "犯过的错不再犯第二次"
+      },
+      "slot": "每次纠错都沉淀为规则，下次自动规避"
+    }
+  ]
+}

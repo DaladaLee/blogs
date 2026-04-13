@@ -1,0 +1,41 @@
+{
+  "component": "AveVerticalList",
+  "children": [
+    {
+      "component": "AveListItem",
+      "props": {
+        "icon": "❓",
+        "bg": "rgba(233,238,255,0.75)",
+        "title": "1. 澄清优先于硬猜"
+      },
+      "slot": "目标有歧义时，先问清楚再开工，宁可多问不带歧义硬干"
+    },
+    {
+      "component": "AveListItem",
+      "props": {
+        "icon": "🏆",
+        "bg": "rgba(235,250,240,0.75)",
+        "title": "2. 质量优先于少打扰"
+      },
+      "slot": "无法保证交付质量时，必须交回用户，不得降级交付"
+    },
+    {
+      "component": "AveListItem",
+      "props": {
+        "icon": "✅",
+        "bg": "rgba(255,250,235,0.75)",
+        "title": "3. 交付前必须无违规"
+      },
+      "slot": "产出必须通过完整 review 循环，不允许未自愈就交付"
+    },
+    {
+      "component": "AveListItem",
+      "props": {
+        "icon": "🚫",
+        "bg": "rgba(254,226,226,0.75)",
+        "title": "4. 禁止把 Agent 当聊天机器人"
+      },
+      "slot": "不是用户聊一句 AI 干一下，而是 AI 自主闭环，质量达标再交付"
+    }
+  ]
+}

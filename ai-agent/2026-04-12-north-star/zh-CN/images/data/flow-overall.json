@@ -1,0 +1,60 @@
+{
+  "component": "AveFlowDiagram",
+  "props": {
+    "direction": "LR",
+    "nodes": [
+      { "id": "OBS", "label": "历史观察",      "color": "muted" },
+      { "id": "REF", "label": "反思提炼",      "color": "yellow" },
+      { "id": "AXI", "label": "全局规则",      "color": "blue" },
+      { "id": "BP",  "label": "领域规则",      "color": "blue" },
+      { "id": "PR",  "label": "项目规则",      "color": "blue" },
+      { "id": "KB",  "label": "知识库",        "color": "blue" },
+      { "id": "SK",  "label": "skill 流程",   "color": "blue" },
+      { "id": "ADE", "label": "自动设计",      "color": "accent" },
+      { "id": "DEV", "label": "自动开发+测试", "color": "accent" },
+      { "id": "DEL", "label": "交付",          "color": "safe" }
+    ],
+    "positions": [
+      { "id": "OBS", "x": 60,  "y": 448 },
+      { "id": "REF", "x": 320, "y": 448 },
+      { "id": "AXI", "x": 580, "y": 188 },
+      { "id": "BP",  "x": 580, "y": 308 },
+      { "id": "PR",  "x": 580, "y": 428 },
+      { "id": "KB",  "x": 580, "y": 548 },
+      { "id": "SK",  "x": 580, "y": 668 },
+      { "id": "ADE", "x": 920, "y": 228 },
+      { "id": "DEV", "x": 920, "y": 408 },
+      { "id": "DEL", "x": 920, "y": 588 }
+    ],
+    "edges": [
+      { "from": "OBS", "to": "REF" },
+      { "from": "REF", "to": "AXI" },
+      { "from": "REF", "to": "BP" },
+      { "from": "REF", "to": "PR" },
+      { "from": "REF", "to": "KB" },
+      { "from": "REF", "to": "SK" },
+      { "from": "AXI", "to": "ADE" },
+      { "from": "BP",  "to": "DEV" },
+      { "from": "PR",  "to": "DEV" },
+      { "from": "KB",  "to": "DEV", "label": "规则+知识+skill" },
+      { "from": "SK",  "to": "DEL" },
+      { "from": "ADE", "to": "DEV" },
+      { "from": "DEV", "to": "DEL" },
+      { "from": "DEL", "to": "OBS", "type": "back", "label": "反哺观察层" }
+    ],
+    "subgraphs": [
+      {
+        "id": "context",
+        "label": "优秀员工指南（沉淀层）",
+        "nodeIds": ["OBS", "REF", "AXI", "BP", "PR", "KB", "SK"],
+        "color": "blue"
+      },
+      {
+        "id": "auto",
+        "label": "全流程自动化（执行层）",
+        "nodeIds": ["ADE", "DEV", "DEL"],
+        "color": "green"
+      }
+    ]
+  }
+}

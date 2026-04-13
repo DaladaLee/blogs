@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="/Users/rui/code/github/docs_theme/visual-components/styles/ave-variables.css">
+  <style>
+.ave-table-wrap[data-v-669141d8] {
+  width: 100%;
+  border-radius: var(--ave-card-radius);
+  overflow: hidden;
+  border: 2px solid var(--ave-border-color, rgba(0, 0, 0, 0.06));
+  background: var(--ave-card-bg);
+}
+.ave-table-scroll[data-v-669141d8] {
+  overflow-x: auto;
+}
+table[data-v-669141d8] {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 500px;
+}
+th[data-v-669141d8], td[data-v-669141d8] {
+  padding: 14px 18px;
+  text-align: left;
+  font-size: var(--ave-body-size);
+  line-height: 1.4;
+}
+
+/* -- Table header row -- */
+thead th[data-v-669141d8] {
+  font-size: var(--ave-subtitle-size);
+  padding: 16px 18px;
+  font-weight: 600;
+  color: var(--ave-text-primary);
+  border-bottom: 2px solid var(--ave-border-color, rgba(0, 0, 0, 0.06));
+}
+
+/* -- Data rows: alternating background -- */
+tbody tr[data-v-669141d8]:nth-child(odd) {
+  background: var(--ave-card-bg);
+}
+tbody tr[data-v-669141d8]:nth-child(even) {
+  background: var(--ave-card-bg-light);
+}
+
+/* -- First column (row labels) -- */
+th[data-v-669141d8]:first-child {
+  color: var(--ave-text-muted);
+  font-weight: 400;
+}
+td[data-v-669141d8]:first-child {
+  color: var(--ave-text-secondary);
+  font-weight: 500;
+}
+
+/* -- Highlight column (recommended) -- */
+th.highlight[data-v-669141d8] {
+  color: var(--ave-accent-contrast, #fff);
+  background: var(--ave-accent);
+}
+td.highlight[data-v-669141d8] {
+  background: var(--ave-accent-bg);
+  color: var(--ave-text-primary);
+  font-weight: 500;
+}
+
+/* -- Dim column (competitors) -- */
+th.dim[data-v-669141d8] { color: var(--ave-text-muted); font-weight: 400;
+}
+td.dim[data-v-669141d8] { color: var(--ave-text-muted);
+}
+
+/* -- Semantic cell colors -- */
+.good[data-v-669141d8] { color: var(--ave-color-good);
+}
+.bad[data-v-669141d8] { color: var(--ave-color-bad);
+}
+td.good[data-v-669141d8] { background: rgba(16, 185, 129, 0.08);
+}
+td.bad[data-v-669141d8] { background: rgba(220, 38, 38, 0.08);
+}
+td.highlight.good[data-v-669141d8] { background: rgba(16, 185, 129, 0.12);
+}
+td.dim.bad[data-v-669141d8] { background: rgba(220, 38, 38, 0.06);
+}
+.neutral[data-v-669141d8] { color: var(--ave-text-secondary);
+}
+.sub[data-v-669141d8] {
+  font-size: var(--ave-small-size);
+  color: var(--ave-text-muted);
+  display: block;
+  margin-top: 2px;
+}
+</style>
+</head>
+<body><div class="ave-table-wrap" data-v-669141d8><div class="ave-table-scroll" data-v-669141d8><table data-v-669141d8><thead data-v-669141d8><tr data-v-669141d8><!--[--><th class="" data-v-669141d8>阶段</th><th class="dim" data-v-669141d8>❌ 聊天机器人模式</th><th class="highlight" data-v-669141d8>✅ 员工模式</th><!--]--></tr></thead><tbody data-v-669141d8><!--[--><tr data-v-669141d8><!--[--><td class="" data-v-669141d8>需求澄清 <!----></td><td class="dim bad" data-v-669141d8>零散挤牙膏，反复多轮来回 <!----></td><td class="highlight good" data-v-669141d8>主动缩小范围，提具体选项让用户确认 <!----></td><!--]--></tr><tr data-v-669141d8><!--[--><td class="" data-v-669141d8>设计 <!----></td><td class="dim bad" data-v-669141d8>AI 出稿 → 用户挑错 → AI 改 → 再挑 <!----></td><td class="highlight good" data-v-669141d8>AI 自己调研、产出设计三件套、循环到合格 <!----></td><!--]--></tr><tr data-v-669141d8><!--[--><td class="" data-v-669141d8>开发+测试 <!----></td><td class="dim bad" data-v-669141d8>写一段让用户 review，测试没过让用户报 bug <!----></td><td class="highlight good" data-v-669141d8>自写自跑单元/集成/端到端测试，全过才算完成 <!----></td><!--]--></tr><tr data-v-669141d8><!--[--><td class="" data-v-669141d8>交付前 <!----></td><td class="dim bad" data-v-669141d8>用户充当 QA，肉眼扫产物 <!----></td><td class="highlight good" data-v-669141d8>AI 自己确认符合所有规则，交付即终态 <!----></td><!--]--></tr><tr data-v-669141d8><!--[--><td class="" data-v-669141d8>真正需要用户 <!----></td><td class="dim bad" data-v-669141d8>&quot;你看这个行不行&quot;、&quot;有没有问题&quot; <!----></td><td class="highlight good" data-v-669141d8>需求变化、偏好选择、能力边界之外的判断 <!----></td><!--]--></tr><!--]--></tbody></table></div></div></body>
+</html>

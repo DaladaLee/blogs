@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="/home/fanrui/code/docs_theme/visual-components/styles/ave-variables.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 32px;
+      background: transparent;
+      font-family: var(--ave-font-family, 'Yuppy SC', -apple-system, BlinkMacSystemFont, sans-serif);
+    }
+    .mermaid {
+      display: flex;
+      justify-content: center;
+    }
+    /* Match VitePress mermaid styles */
+    .mermaid foreignObject {
+      overflow: visible !important;
+    }
+    .mermaid foreignObject > div {
+      line-height: 1.5 !important;
+      white-space: normal !important;
+      overflow: visible !important;
+    }
+    .mermaid .node rect {
+      rx: 12px;
+      ry: 12px;
+    }
+  </style>
+  <script src="/home/fanrui/code/creator/generated/cache/mermaid.min.js"></script>
+</head>
+<body>
+  <div class="mermaid">
+flowchart LR
+    ORC["编排者"] --> DO["sub-agent 干活"]
+    DO --> RV["多 reviewers"]
+    RV -- 不通过 --> DO
+    RV -- 全部通过 --> NEXT["进入下一环"]
+
+    classDef orch fill:#fff7e0,stroke:#f4b400,color:#8a6300
+    classDef work fill:#eef4ff,stroke:#6366f1,color:#4338ca
+    classDef review fill:#fdecea,stroke:#dc2626,color:#b91c1c
+    classDef next fill:#d9f5e4,stroke:#34a853,color:#1e7e34
+
+    class ORC orch
+    class DO work
+    class RV review
+    class NEXT next
+  </div>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      fontFamily: 'sans-serif',
+      fontSize: 16,
+    });
+  </script>
+</body>
+</html>
